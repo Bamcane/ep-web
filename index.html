@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Electrolysis Protocol | Secure Access</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+  <div class="watermark">CLASSIFIED // EYES ONLY // ELECTROLYSIS PROTOCOL</div>
+
+  <header class="header">
+    <div class="logo">
+      <h1>Electrolysis Protocol</h1>
+      <p>Advanced Anomaly Containment Division</p>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="hero">
+      <h2>Contain. Study. Neutralize.</h2>
+      <p class="tagline">We operate where science ends and the unexplained begins.</p>
+      <div class="alert-banner">
+        🔴 <strong>ACTIVE THREAT LEVEL: SIERRA-9</strong> | S.U.L.F.U.R. PROTOCOL ENGAGED
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <h3>Electrolysis Protocol</h3>
+      <p>
+        A classified research and response division established under Directive 11.
+        Our mission is to investigate, contain, and neutralize phenomena that defy conventional scientific understanding.
+        Operating in total secrecy, we interface with global intelligence and scientific networks to preserve ontological stability.
+      </p>
+      <div class="clearance-badge">CLEARANCE LEVEL: OMEGA // AUTHORIZED PERSONNEL ONLY</div>
+    </section>
+
+    <section id="projects" class="section highlight">
+      <h3>S.U.L.F.U.R. Initiative</h3>
+      <p class="code-name">Scientific Unconventional Laboratory Field Unit Response</p>
+      <p>
+        <strong>STATUS:</strong> <span class="status-active">ACTIVE</span><br/>
+        <strong>THREAT DESIGNATION:</strong> ANOMALY-S // CLASS 4+<br/>
+        <strong>LOCATION:</strong> [REDACTED] // FIELD OPERATIONS ONGOING
+      </p>
+      <p class="note">
+        All personnel assigned to S.U.L.F.U.R. are under Directive 16. 
+        Unauthorized disclosure results in immediate neural wipe and reassignment.
+      </p>
+    </section>
+
+    <div class="terminal-access">
+        <h4>ACCESS TERMINAL // INPUT CREDENTIALS TO UNLOCK SULFUR DOSSIER</h4>
+        <input type="text" id="authCode" placeholder="Enter Clearance Code..." />
+        <button onclick="unlockDossier()">AUTHENTICATE</button>
+        <p id="statusMsg"></p>
+    </div>
+    <div id="classifiedDossier" class="dossier-content" style="display:none;">
+        <h3>DOSSIER: SULFUR // LEVEL 5 CLEARANCE</h3>
+        <p><strong>NAME:</strong>Majdom</p>
+        <p><strong>LOCATION:</strong> laptop of Dr.c29z</p>
+        <p><strong>BEHAVIOR:</strong> Drain enthusiasm </p>
+    </div>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Electrolysis Protocol | Internal Use Only</p>
+    <p>Directive 11 // This site is not indexed. Do not distribute.</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    function unlockDossier() {
+        const input = document.getElementById("authCode").value.trim();
+        const statusMsg = document.getElementById("statusMsg");
+        const dossier = document.getElementById("classifiedDossier");
+
+        const validCodes = [
+            "16ddaedb8d892cd4ca35d2714d723d7df0788abaccac64209519a8ccbca9fdab"
+        ];
+
+        if (!input) {
+            statusMsg.style.color = "#ffcc00";
+            statusMsg.textContent = "Please enter a clearance code.";
+            return;
+        }
+
+        const hash = CryptoJS.SHA256(input.trim().toUpperCase()).toString(CryptoJS.enc.Hex);
+        if (validCodes.includes(hash)) {
+            statusMsg.style.color = "#00ff00";
+            statusMsg.textContent = "AUTHENTICATION SUCCESSFUL. DECRYPTING DOSSIER...";
+
+            setTimeout(() => {
+            document.getElementById("classifiedDossier").style.display = "block";
+            window.scrollTo(0, document.body.scrollHeight);
+            }, 1500);
+        } 
+        else {
+            statusMsg.style.color = "#ff3030";
+            statusMsg.textContent = "ACCESS DENIED. INVALID CREDENTIALS.";
+            
+            const inputField = document.getElementById("authCode");
+            inputField.style.animation = "shake 0.5s";
+            setTimeout(() => { inputField.style.animation = ""; }, 500);
+        }
+    }
+
+    const style = document.createElement('style');
+    style.textContent = `
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
+    }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
